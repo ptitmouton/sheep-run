@@ -1,5 +1,6 @@
 import './index.css';
 import { Background } from './entities/background';
+import { Platform } from './entities/platform';
 
 let canvas;
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.append(canvas);
     
     const background = new Background(canvas);
+    const platforms = [
+        new Platform(canvas, 100, 282),
+        new Platform(canvas, 250, 282),
+        new Platform(canvas, 500, 282),
+        new Platform(canvas, 700, 282),
+    ];
 
-    background.load();
+    Promise.all([
+        background.load(),
+        ...platforms.map(p => p.load())
+    ]);
 });
