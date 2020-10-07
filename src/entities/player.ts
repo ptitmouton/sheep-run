@@ -26,6 +26,8 @@ export class Player extends BaseObject {
 
     protected jumpCount = 0;
 
+    protected animationSpeed = 100;
+
     constructor(x: number, groundLevel: number) {
         super();
         this.x = x;
@@ -36,16 +38,16 @@ export class Player extends BaseObject {
     public update() {
         if (Input.leftKey) {
             this.isMirrored = true;
-            this.velocity[0] = clamp(this.velocity[0]+1, -7, 7);
+            this.velocity[0] = clamp(this.velocity[0]+.5, 0, 4);
         }
         if (Input.rightKey) {
             this.isMirrored = false;
-            this.velocity[0] = clamp(this.velocity[0]+1, -7, 7);
+            this.velocity[0] = clamp(this.velocity[0]+.5, 0, 4);
         }
 
         if (this.velocity[1] < 0) {
             this.y += this.velocity[1];
-            this.velocity[1] += .5;
+            this.velocity[1] += .2;
         } else if (this.y < this.groundLevel) {
             this.velocity[1] += .5;
             this.y += this.velocity[1];
@@ -81,7 +83,7 @@ export class Player extends BaseObject {
         if (this.jumpCount < 2) {
             this.jumpCount++;
             this.setState(PlayerState.Jump);
-            this.velocity[1] = -10;
+            this.velocity[1] = -5;
         }
     }
 
