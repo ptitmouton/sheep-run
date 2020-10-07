@@ -5,6 +5,8 @@ export abstract class BaseEntity {
 
     protected currentState: number = 0;
 
+    protected tiles = 1;
+
     protected x: number;
 
     protected y: number;
@@ -30,8 +32,20 @@ export abstract class BaseEntity {
         );
     }
 
-    render(canvas: HTMLCanvasElement) {
+    render(canvas: HTMLCanvasElement, tileIndex = 0) {
         const context = canvas.getContext('2d');
-        context.drawImage((this.constructor as typeof BaseEntity).images.get(`${this.constructor.name}-${this.currentState}`), this.x, this.y, this.width, this.height);
+        const image = (this.constructor as typeof BaseEntity).images.get(`${this.constructor.name}-${this.currentState}`);
+        const tileWidth = image.width / this.tiles;
+        context.drawImage(
+            image,
+            tileIndex,
+            0,
+            tileWidth,
+            image.height,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        );
     }
 }

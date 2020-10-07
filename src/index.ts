@@ -1,6 +1,7 @@
 import './index.css';
 import { Background } from './entities/background';
 import { Platform } from './entities/platform';
+import { Player } from './entities/player';
 
 const gameWidth = 1024;
 const gameHeight = 512;
@@ -14,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Promise.all([
         Background.load(),
-        Platform.load()
+        Platform.load(),
+        Player.load()
     ]).then(() => {
         const background = new Background(gameWidth, gameHeight);
         const platforms = [
@@ -23,8 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
             new Platform(500, 282),
             new Platform(700, 282),
         ];
+        const player = new Player(125, 240);
 
         background.render(canvas);
         platforms.map(p => p.render(canvas));
+        player.render(canvas);
     });
 });
