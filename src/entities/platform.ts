@@ -6,9 +6,9 @@ export class Platform extends Obstacle {
         [0, new Spritesheet(require('../assets/platform.png').default)]
     ]);
 
-    protected width = 100;
+    public width = 50;
 
-    protected height = 65;
+    public height = 30;
 
     constructor(x: number, y: number) {
         super(2);

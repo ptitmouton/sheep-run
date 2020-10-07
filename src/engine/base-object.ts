@@ -7,23 +7,23 @@ export abstract class BaseObject {
 
     protected currentAnimationStep = 0;
 
-    protected velocity: [number, number] = [0, 3];
+    public velocity: [number, number] = [0, 3];
 
-    protected x: number;
+    public x: number;
 
-    protected y: number;
+    public y: number;
 
-    protected width: number;
+    public width: number;
 
-    protected height: number;
+    public height: number;
 
     protected lastAnimate = 0;
 
-    protected animationSpeed = 250;
+    public animationSpeed = 250;
 
     public isMirrored = false;
 
-    static load() {
+    public static load() {
         return Promise.all(
             Array.from(this.spritesheets.entries())
                 .map(([state]) => this.spritesheets.get(state).load())

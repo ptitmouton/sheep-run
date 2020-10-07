@@ -1,7 +1,7 @@
 import { BaseObject } from '../engine/base-object';
 import { Spritesheet } from '../engine/spritesheet';
 
-export class Background extends BaseObject {
+export class BaseBackground extends BaseObject {
     protected static spritesheets = new Map([
         [0, new Spritesheet(require('../assets/background2.png').default)]
     ]);
@@ -10,10 +10,7 @@ export class Background extends BaseObject {
 
     protected y = 0;
 
-    constructor(width: number, height: number) {
-        super();
-        this.width = width;
-        this.height = height;
-    }
+    protected width = 1024;
 
+    protected height = 512;
 }

@@ -7,11 +7,14 @@ export const Input = {
         document.addEventListener('keydown', e => {
             if (e.code === 'Arrowup' || e.code === 'KeyW') {
                 this.jumpKey = true;
-            } else if (e.code === 'ArrowLeft' || e.code === 'KeyA') { 
+            }
+            if (e.code === 'ArrowLeft' || e.code === 'KeyA') { 
                 this.leftKey = true;
-            } else if (e.code === 'ArrowRight' || e.code === 'KeyD') { 
+            }
+            if (e.code === 'ArrowRight' || e.code === 'KeyD') { 
                 this.rightKey = true;
-            } else if (e.code === 'Space') {
+            }
+            if (e.code === 'Space') {
                 this.actionKey = true;
             }
         });
