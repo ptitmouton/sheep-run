@@ -1,8 +1,9 @@
 import { BaseObject } from '../engine/base-object';
+import { Spritesheet } from '../engine/spritesheet';
 
 export class Platform extends BaseObject {
-    protected static urls = new Map([
-        [0, require('../assets/platform.png').default]
+    protected static spritesheets = new Map([
+        [0, new Spritesheet(require('../assets/platform.png').default)]
     ]);
 
     protected width = 100;

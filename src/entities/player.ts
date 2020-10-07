@@ -1,4 +1,5 @@
 import { BaseObject } from '../engine/base-object';
+import { Spritesheet } from '../engine/spritesheet';
 
 export enum PlayerState {
     Idle,
@@ -7,10 +8,10 @@ export enum PlayerState {
 };
 
 export class Player extends BaseObject {
-    protected static urls = new Map([
-        [PlayerState.Idle, require('../assets/Black_sheep_Idle.png').default],
-        [PlayerState.Jump, require('../assets/Black_sheep_Jump.png').default],
-        [PlayerState.Run, require('../assets/Black_sheep_Run.png').default],
+    protected static spritesheets = new Map([
+        [PlayerState.Idle, new Spritesheet(require('../assets/Black_sheep_Idle.png').default, 4)],
+        [PlayerState.Jump, new Spritesheet(require('../assets/Black_sheep_Jump.png').default)],
+        [PlayerState.Run, new Spritesheet(require('../assets/Black_sheep_Run.png').default)],
     ]);
 
     constructor(x: number, y: number) {
