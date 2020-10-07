@@ -23,7 +23,7 @@ export class Game {
             if (e.keyCode === 27) { // ESCAPE
                 this.isPlaying = !this.isPlaying;
             } else if (e.keyCode === 32) { // SPACE
-                this.isPlaying = true;
+                this.player.jump();
             }
         });
     }

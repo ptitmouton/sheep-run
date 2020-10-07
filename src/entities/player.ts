@@ -18,13 +18,30 @@ export class Player extends BaseObject {
         super();
         this.x = x;
         this.y = y;
-        this.width = 60;
-        this.height = 50;
-        this.animationSteps = 4;
     }
 
     public run() {
         this.currentState = PlayerState.Run;
         this.animateEvery = 100;
+        this.width = 60;
+        this.height = 50;
+    }
+
+    public jump() {
+        if (this.currentState !== PlayerState.Jump) {
+            this.currentState = PlayerState.Jump;
+            this.currentAnimationStep = 0;
+            this.animateEvery = 100;
+            this.width = 60;
+            this.height = 78;
+            this.y -= 55;
+        }
+    }
+
+    public onAnimationCycleTerminate() {
+        if (this.currentState === PlayerState.Jump) {
+            this.currentState = PlayerState.Run;
+            this.y += 55;
+        }
     }
 }

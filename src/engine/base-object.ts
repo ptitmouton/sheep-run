@@ -32,10 +32,11 @@ export abstract class BaseObject {
         return timestamp - this.lastAnimate >= this.animateEvery;
     }
 
-    animate(timestamp: number) {
+    public animate(timestamp: number) {
         if (this.shouldAnimate(timestamp)) {
             if (this.currentAnimationStep === (this.constructor as typeof BaseObject).spritesheets.get(this.currentState).size - 1) {
                 this.currentAnimationStep = 0;
+                this.onAnimationCycleTerminate();
             } else {
                 this.currentAnimationStep++;
             }
@@ -43,10 +44,11 @@ export abstract class BaseObject {
         }
     }
 
-    update() {
-    }
+    public update() { }
 
-    render(canvas: HTMLCanvasElement) {
+    public onAnimationCycleTerminate() {}
+
+    public render(canvas: HTMLCanvasElement) {
         const context = canvas.getContext('2d');
         const spritesheet = (this.constructor as typeof BaseObject).spritesheets.get(this.currentState);
         const boundingRect = spritesheet.getBoundingRectForIndex(this.currentAnimationStep);
