@@ -46,6 +46,14 @@ export abstract class BaseObject {
         }
     }
 
+    public setState(state: number) {
+        if (this.currentState !== state) {
+            this.currentAnimationStep = 0;
+            console.debug(`set ${this.constructor.name} state: ${state}`);
+            this.currentState = state;
+        }
+    }
+
     public update() { }
 
     public onAnimationCycleTerminate() {}

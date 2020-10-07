@@ -18,6 +18,14 @@ export class Spritesheet {
         return this.tilesCount;
     }
 
+    public get tileWidth() {
+        return this.image.width / this.tilesCount;
+    }
+
+    public get tileHeight() {
+        return this.image.height;
+    }
+
     public load() {
         return new Promise((resolve, reject) => {
             const image = new Image();
@@ -31,26 +39,11 @@ export class Spritesheet {
     }
 
     public getBoundingRectForIndex(index: number) {
-        const tileWidth = this.image.width / this.tilesCount;
         return {
-            x: index * tileWidth,
+            x: index * this.tileWidth,
             y: 0,
-            width: tileWidth,
+            width: this.tileWidth,
             height: this.image.height
         };
-    }
-
-    public draw(canvas: HTMLCanvasElement, x: number, y: number, width: number, height: number) {
-        canvas.getContext('2d').drawImage(
-            this.image,
-            boundingRect.x,
-            boundingRect.y,
-            boundingRect.width,
-            boundingRect.height,
-            x,
-            y,
-            width,
-            height
-        );
     }
 }
