@@ -3,9 +3,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
+    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     devServer: {
-        contentBase: join(__dirname, 'dist'),
+        contentBase: join(__dirname, 'docs'),
         compress: false,
         port: 9000,
         hot: true
@@ -42,6 +42,6 @@ module.exports = {
     ],
     output: {
         filename: '[name].bundle.js',
-        path: join(__dirname, 'dist')
+        path: join(__dirname, 'docs')
     }
 };
