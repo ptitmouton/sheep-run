@@ -22,9 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const entities = [
             new Background(gameWidth, gameHeight),
             new Platform(100, 282),
-            new Platform(250, 282),
-            new Platform(500, 282),
-            new Platform(700, 282),
+            new Platform(250, 227),
+            new Platform(500, 199),
+            new Platform(700, 240),
+            new Platform(867, 282),
+            new Platform(999, 200),
         ];
         const player = new Player(125, 240);
         const game = new Game(canvas, entities, player);

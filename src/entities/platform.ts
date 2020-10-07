@@ -1,7 +1,7 @@
-import { BaseObject } from '../engine/base-object';
+import { Obstacle } from '../base/obstacle';
 import { Spritesheet } from '../engine/spritesheet';
 
-export class Platform extends BaseObject {
+export class Platform extends Obstacle {
     protected static spritesheets = new Map([
         [0, new Spritesheet(require('../assets/platform.png').default)]
     ]);
@@ -11,7 +11,7 @@ export class Platform extends BaseObject {
     protected height = 65;
 
     constructor(x: number, y: number) {
-        super();
+        super(2);
         this.x = x;
         this.y = y;
     }

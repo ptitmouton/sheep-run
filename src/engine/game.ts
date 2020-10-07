@@ -1,5 +1,5 @@
-import { BaseObject } from './entities/base-object';
-import { Player } from './entities/player';
+import { BaseObject } from './base-object';
+import { Player } from '../entities/player';
 
 export class Game {
     protected canvas: HTMLCanvasElement;
@@ -8,7 +8,7 @@ export class Game {
 
     protected player: Player;
 
-    protected isPlaying: boolean = true;
+    protected isPlaying = true;
 
     constructor(canvas: HTMLCanvasElement, entities: BaseObject[], player: Player) {
         this.canvas = canvas;
@@ -18,16 +18,28 @@ export class Game {
 
     public init() {
         this.next(0);
+        this.player.run();
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 27) { // ESCAPE
+                this.isPlaying = !this.isPlaying;
+            } else if (e.keyCode === 32) { // SPACE
+                this.isPlaying = true;
+            }
+        });
     }
 
-    protected update(timestamp: number) {
-        this.entities.forEach(entity => entity.update(timestamp));
-        this.player.update(timestamp);
+    protected animate(timestamp: number) {
+        this.entities.forEach(entity => {
+            entity.animate(timestamp);
+            entity.update();
+        });
+        this.player.animate(timestamp);
+        this.player.update();
     }
 
     protected next(timestamp: number) {
         if (this.isPlaying) {
-            this.update(timestamp);
+            this.animate(timestamp);
             this.render();
         }
         requestAnimationFrame(timestamp => this.next(timestamp));

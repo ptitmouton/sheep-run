@@ -17,9 +17,9 @@ export abstract class BaseObject {
 
     protected height: number;
 
-    protected lastUpdate = 0;
+    protected lastAnimate = 0;
 
-    protected updateEvery = 350;
+    protected animateEvery = 350;
 
     static load() {
         return Promise.all(
@@ -28,19 +28,22 @@ export abstract class BaseObject {
         );
     }
 
-    protected shouldUpdate(timestamp: number) {
-        return timestamp - this.lastUpdate >= this.updateEvery;
+    protected shouldAnimate(timestamp: number) {
+        return timestamp - this.lastAnimate >= this.animateEvery;
     }
 
-    update(timestamp: number) {
-        if (this.shouldUpdate(timestamp)) {
+    animate(timestamp: number) {
+        if (this.shouldAnimate(timestamp)) {
             if (this.currentAnimationStep === (this.constructor as typeof BaseObject).spritesheets.get(this.currentState).size - 1) {
                 this.currentAnimationStep = 0;
             } else {
                 this.currentAnimationStep++;
             }
-            this.lastUpdate = timestamp;
+            this.lastAnimate = timestamp;
         }
+    }
+
+    update() {
     }
 
     render(canvas: HTMLCanvasElement) {
