@@ -1,22 +1,18 @@
-export class Background {
-    private url = require('../assets/background2.png').default;
+import { BaseEntity } from './base-entity';
 
-    private parentCanvas = null;
+export class Background extends BaseEntity {
+    protected static urls = new Map([
+        [0, require('../assets/background2.png').default]
+    ]);
 
-    constructor(parentCanvas) {
-        this.parentCanvas = parentCanvas;
+    protected x = 0;
+
+    protected y = 0;
+
+    constructor(width: number, height: number) {
+        super();
+        this.width = width;
+        this.height = height;
     }
 
-    load() {
-        return new Promise((resolve, reject) => {
-            const image = new Image();
-            image.addEventListener('load', () => {
-                const ctx = this.parentCanvas.getContext('2d');
-                ctx.drawImage(image, 0, 0, this.parentCanvas.width, this.parentCanvas.height);
-                resolve();
-            });
-            image.addEventListener('error', reject)
-            image.src = this.url;
-        });
-    }
 }

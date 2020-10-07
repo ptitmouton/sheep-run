@@ -1,28 +1,17 @@
-export class Platform {
-    private url = require('../assets/platform.png').default;
+import { BaseEntity } from './base-entity';
 
-    private parentCanvas: HTMLCanvasElement;
+export class Platform extends BaseEntity {
+    protected static urls = new Map([
+        [0, require('../assets/platform.png').default]
+    ]);
 
-    private x: number;
+    protected width = 100;
 
-    private y: number;
+    protected height = 65;
 
-    constructor(parentCanvas: HTMLCanvasElement, x: number, y: number) {
-        this.parentCanvas = parentCanvas;
+    constructor(x: number, y: number) {
+        super();
         this.x = x;
         this.y = y;
-    }
-
-    load() {
-        return new Promise((resolve, reject) => {
-            const image = new Image();
-            image.addEventListener('load', () => {
-                const ctx = this.parentCanvas.getContext('2d');
-                ctx.drawImage(image, this.x, this.y, 100, 65);
-                resolve();
-            });
-            image.addEventListener('error', reject)
-            image.src = this.url;
-        });
     }
 }
