@@ -1,4 +1,4 @@
-import { BaseObject } from './base-object';
+import { BaseObject } from '../engine/base-object';
 
 export class Background extends BaseObject {
     protected static urls = new Map([

@@ -1,4 +1,4 @@
-import { BaseObject } from './base-object';
+import { BaseObject } from '../engine/base-object';
 
 export enum PlayerState {
     Idle,

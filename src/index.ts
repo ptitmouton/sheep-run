@@ -2,7 +2,7 @@ import './index.css';
 import { Background } from './entities/background';
 import { Platform } from './entities/platform';
 import { Player } from './entities/player';
-import { Game } from './game';
+import { Game } from './engine/game';
 
 const gameWidth = 1024;
 const gameHeight = 512;
