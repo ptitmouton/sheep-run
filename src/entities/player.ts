@@ -19,6 +19,6 @@ export class Player extends BaseEntity {
         this.y = y;
         this.width = 60;
         this.height = 50;
-        this.tiles = 4;
+        this.animationSteps = 4;
     }
 }

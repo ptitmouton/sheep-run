@@ -2,6 +2,7 @@ import './index.css';
 import { Background } from './entities/background';
 import { Platform } from './entities/platform';
 import { Player } from './entities/player';
+import { Game } from './game';
 
 const gameWidth = 1024;
 const gameHeight = 512;
@@ -18,17 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
         Platform.load(),
         Player.load()
     ]).then(() => {
-        const background = new Background(gameWidth, gameHeight);
-        const platforms = [
+        const entities = [
+            new Background(gameWidth, gameHeight),
             new Platform(100, 282),
             new Platform(250, 282),
             new Platform(500, 282),
             new Platform(700, 282),
         ];
         const player = new Player(125, 240);
+        const game = new Game(canvas, entities, player);
 
-        background.render(canvas);
-        platforms.map(p => p.render(canvas));
-        player.render(canvas);
+        game.init();
     });
 });
