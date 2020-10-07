@@ -4,7 +4,8 @@
   "description": "## Links",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,24 @@
   "bugs": {
     "url": "https://github.com/sspringer82/jsdays-sheepnrun/issues"
   },
-  "homepage": "https://github.com/sspringer82/jsdays-sheepnrun#readme"
+  "homepage": "https://github.com/sspringer82/jsdays-sheepnrun#readme",
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.5.0",
+    "source-map-loader": "^1.1.0",
+    "style-loader": "^1.3.0",
+    "typescript": "^4.0.3",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.2"
+  }
 }

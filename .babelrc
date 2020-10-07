@@ -1,0 +1,9 @@
+{
+    "presets": [
+        "@babel/typescript",
+        "@babel/env"
+    ],
+    "plugins": [
+        "transform-class-properties"
+    ]
+}
