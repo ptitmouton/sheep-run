@@ -1,6 +1,6 @@
-import { BaseEntity } from './base-entity';
+import { BaseObject } from './base-object';
 
-export class Background extends BaseEntity {
+export class Background extends BaseObject {
     protected static urls = new Map([
         [0, require('../assets/background2.png').default]
     ]);

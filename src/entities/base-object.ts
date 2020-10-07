@@ -1,4 +1,4 @@
-export abstract class BaseEntity {
+export abstract class BaseObject {
     protected static urls: Map<number, string> = new Map();
 
     protected static images: Map<string, HTMLImageElement> = new Map();

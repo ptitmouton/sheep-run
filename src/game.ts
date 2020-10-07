@@ -1,16 +1,16 @@
-import { BaseEntity } from './entities/base-entity';
+import { BaseObject } from './entities/base-object';
 import { Player } from './entities/player';
 
 export class Game {
     protected canvas: HTMLCanvasElement;
 
-    protected entities: BaseEntity[];
+    protected entities: BaseObject[];
 
     protected player: Player;
 
     protected isPlaying: boolean = true;
 
-    constructor(canvas: HTMLCanvasElement, entities: BaseEntity[], player: Player) {
+    constructor(canvas: HTMLCanvasElement, entities: BaseObject[], player: Player) {
         this.canvas = canvas;
         this.entities = entities;
         this.player = player;

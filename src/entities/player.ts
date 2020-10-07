@@ -1,4 +1,4 @@
-import { BaseEntity } from './base-entity';
+import { BaseObject } from './base-object';
 
 export enum PlayerState {
     Idle,
@@ -6,7 +6,7 @@ export enum PlayerState {
     Run
 };
 
-export class Player extends BaseEntity {
+export class Player extends BaseObject {
     protected static urls = new Map([
         [PlayerState.Idle, require('../assets/Black_sheep_Idle.png').default],
         [PlayerState.Jump, require('../assets/Black_sheep_Jump.png').default],
