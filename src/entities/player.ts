@@ -60,7 +60,7 @@ export class Player extends BaseObject {
         if (this.velocity[1] <= 0) {
             this.y += this.velocity[1];
             this.velocity[1] += .5;
-        } else if (this.y <= this.groundLevel) {
+        } else if (this.y < this.groundLevel) {
             this.velocity[1] += .5;
             this.y += this.velocity[1];
         } else {

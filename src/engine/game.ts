@@ -33,11 +33,11 @@ export class Game {
 
     protected animate(timestamp: number) {
         this.entities.forEach(entity => {
-            entity.update();
             entity.animate(timestamp);
+            entity.update();
         });
-        this.player.update();
         this.player.animate(timestamp);
+        this.player.update();
     }
 
     protected next(timestamp: number) {

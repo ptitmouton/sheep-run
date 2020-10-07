@@ -58,9 +58,9 @@ export abstract class BaseObject {
             spritesheet.image,
             boundingRect.x,
             boundingRect.y,
-            boundingRect.width * (this.isMirrored ? -1 : 1),
+            boundingRect.width,
             boundingRect.height,
-            this.x,// + (this.isMirrored ? this.width : 0),
+            this.x,
             this.y,
             this.width,
             this.height
