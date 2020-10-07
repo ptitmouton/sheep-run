@@ -9,10 +9,10 @@ export class Obstacle extends BaseObject {
     }
 
     public update() {
-        if (this.x + this.width < 0) {
-            this.x = 1024;
-        } else {
-            this.x -= this.speed;
-        }
+        // if (this.x + this.width < 0) {
+        //     this.x = 1024;
+        // } else {
+        //     this.x -= this.speed;
+        // }
     }
 }

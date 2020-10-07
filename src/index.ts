@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             new Platform(867, 282),
             new Platform(999, 200),
         ];
-        const player = new Player(125, 240);
+        const player = new Player(125, 370);
         const game = new Game(canvas, entities, player);
 
         game.init();

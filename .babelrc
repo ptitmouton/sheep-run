@@ -1,7 +1,9 @@
 {
     "presets": [
         "@babel/typescript",
-        "@babel/env"
+        ["@babel/env", {
+            "useBuiltIns": "entry"
+        }]
     ],
     "plugins": [
         "transform-class-properties"

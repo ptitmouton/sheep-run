@@ -18,23 +18,26 @@ export class Game {
 
     public init() {
         this.next(0);
-        this.player.run();
         document.addEventListener('keydown', e => {
-            if (e.keyCode === 27) { // ESCAPE
+            if (e.code === 'Escape') {
                 this.isPlaying = !this.isPlaying;
-            } else if (e.keyCode === 32) { // SPACE
+            } else if (e.code === 'Space') {
                 this.player.jump();
+            } else if (e.code === 'ArrowLeft') { 
+                this.player.goLeft();
+            } else if (e.code === 'ArrowRight') { 
+                this.player.goRight();
             }
         });
     }
 
     protected animate(timestamp: number) {
         this.entities.forEach(entity => {
-            entity.animate(timestamp);
             entity.update();
+            entity.animate(timestamp);
         });
-        this.player.animate(timestamp);
         this.player.update();
+        this.player.animate(timestamp);
     }
 
     protected next(timestamp: number) {

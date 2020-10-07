@@ -7,7 +7,7 @@ export abstract class BaseObject {
 
     protected currentAnimationStep = 0;
 
-    protected animationSteps = 1;
+    protected velocity: [number, number] = [0, 3];
 
     protected x: number;
 
@@ -19,7 +19,9 @@ export abstract class BaseObject {
 
     protected lastAnimate = 0;
 
-    protected animateEvery = 350;
+    protected animationSpeed = 250;
+
+    public isMirrored = false;
 
     static load() {
         return Promise.all(
@@ -29,12 +31,12 @@ export abstract class BaseObject {
     }
 
     protected shouldAnimate(timestamp: number) {
-        return timestamp - this.lastAnimate >= this.animateEvery;
+        return timestamp - this.lastAnimate >= this.animationSpeed;
     }
 
     public animate(timestamp: number) {
         if (this.shouldAnimate(timestamp)) {
-            if (this.currentAnimationStep === (this.constructor as typeof BaseObject).spritesheets.get(this.currentState).size - 1) {
+            if (this.currentAnimationStep >= (this.constructor as typeof BaseObject).spritesheets.get(this.currentState).size - 1) {
                 this.currentAnimationStep = 0;
                 this.onAnimationCycleTerminate();
             } else {
@@ -56,9 +58,9 @@ export abstract class BaseObject {
             spritesheet.image,
             boundingRect.x,
             boundingRect.y,
-            boundingRect.width,
+            boundingRect.width * (this.isMirrored ? -1 : 1),
             boundingRect.height,
-            this.x,
+            this.x,// + (this.isMirrored ? this.width : 0),
             this.y,
             this.width,
             this.height
