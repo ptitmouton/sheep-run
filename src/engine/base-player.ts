@@ -63,12 +63,12 @@ export class BasePlayer extends BaseObject {
         }
     }
 
-    public onAnimationCycleTerminate() {
-        if (PlayerState.Attack) {
+    public onAnimationCycleTerminate(state: PlayerState) {
+        if (state === PlayerState.Attack) {
             this.isAttacking = false;
             this.setState(PlayerState.Idle)
         }
-        if (PlayerState.AttackMirrored) {
+        if (state === PlayerState.AttackMirrored) {
             this.isAttacking = false;
             this.setState(PlayerState.IdleMirrored)
         }

@@ -6,9 +6,9 @@ export abstract class BaseObject {
 
     protected static audio: Map<number, AudioEffect> = new Map();
 
-    protected currentState = 0;
+    public currentState = 0;
 
-    protected currentAnimationStep = 0;
+    public currentAnimationStep = 0;
 
     public velocity: [number, number] = [0, 3];
 
@@ -65,7 +65,7 @@ export abstract class BaseObject {
         if (this.shouldAnimate(timestamp)) {
             if (this.currentAnimationStep >= (this.constructor as typeof BaseObject).spritesheets.get(this.currentState).size - 1) {
                 this.currentAnimationStep = 0;
-                this.onAnimationCycleTerminate();
+                this.onAnimationCycleTerminate(this.currentState);
             } else {
                 this.currentAnimationStep++;
             }
@@ -73,7 +73,7 @@ export abstract class BaseObject {
         }
     }
 
-    public onSetState(oldState: number, newState: number) {
+    protected onSetState(oldState: number, newState: number) {
         this.currentAnimationStep = 0;
     }
 
@@ -86,7 +86,7 @@ export abstract class BaseObject {
 
     public update() { }
 
-    public onAnimationCycleTerminate() {}
+    protected onAnimationCycleTerminate(newState: number) {}
 
     public render(canvas: HTMLCanvasElement) {
         const context = canvas.getContext('2d');

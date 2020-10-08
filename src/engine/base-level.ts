@@ -173,5 +173,8 @@ export class BaseLevel {
 
         ctx.fillText(`jumpCount: ${this.player.jumpCount}`, 100, 15);
         ctx.fillText(`isAttacking: ${this.player.isAttacking}`, 100, 30);
+        ctx.fillText(`isMirrored: ${this.player.isAttacking}`, 100, 45);
+        ctx.fillText(`playerState: ${this.player.currentState}`, 100, 60);
+        ctx.fillText(`animationStep: ${this.player.currentAnimationStep}`, 100, 75);
     }
 }
