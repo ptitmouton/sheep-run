@@ -14,5 +14,5 @@ export const level1 = new BaseLevel({
         new Platform(867, 382),
         new Platform(999, 300),
     ],
-    player: new BasePlayer(10, 400)
+    player: new BasePlayer(50, 25)
 });

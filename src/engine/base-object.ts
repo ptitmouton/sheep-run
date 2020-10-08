@@ -23,6 +23,8 @@ export abstract class BaseObject {
 
     public isMirrored = false;
 
+    public boundingMargin = [40, 5];
+
     public static load() {
         return Promise.all(
             Array.from(this.spritesheets.entries())
@@ -32,6 +34,22 @@ export abstract class BaseObject {
 
     protected shouldAnimate(timestamp: number) {
         return timestamp - this.lastAnimate >= this.animationSpeed;
+    }
+
+    public contains(x: number, y: number) {
+        return (
+            x >= this.x && x <= this.x + this.width &&
+            y >= this.y && y <= this.y + this.height
+        );
+    }
+
+    public overlaps(otherObject: { x: number; y: number; width: number; height: number; }) {
+        return (
+            otherObject.x + otherObject.width >= this.x + this.boundingMargin[0] &&
+            otherObject.x + this.boundingMargin[0] <= this.x + this.width &&
+            otherObject.y + otherObject.height >= this.y + this.boundingMargin[1] &&
+            otherObject.y + this.boundingMargin[1] <= this.y + this.height
+        );
     }
 
     public animate(timestamp: number) {
