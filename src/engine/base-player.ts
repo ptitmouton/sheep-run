@@ -10,6 +10,8 @@ export enum PlayerState {
     FallMirrored,
     Run,
     RunMirrored,
+    Attack,
+    AttackMirrored,
 };
 
 export class BasePlayer extends BaseObject {
@@ -22,23 +24,24 @@ export class BasePlayer extends BaseObject {
         [PlayerState.RunMirrored, new Spritesheet(require('../assets/player/HeroKnight_Run_Mirrored.png').default, 10)],
         [PlayerState.Fall, new Spritesheet(require('../assets/player/HeroKnight_Fall.png').default, 4)],
         [PlayerState.FallMirrored, new Spritesheet(require('../assets/player/HeroKnight_Fall_Mirrored.png').default, 4)],
+        [PlayerState.Attack, new Spritesheet(require('../assets/player/HeroKnight_Attack.png').default, 8)],
+        [PlayerState.AttackMirrored, new Spritesheet(require('../assets/player/HeroKnight_Attack_Mirrored.png').default, 8)],
     ]);
 
     public width = 100;
 
     public height = 55;
 
-    public groundLevel = 0;
-
     public jumpCount = 0;
+
+    public isAttacking = false;
 
     public animationSpeed = 100;
 
-    constructor(x: number, groundLevel: number) {
+    constructor(x: number, y: number) {
         super();
         this.x = x;
-        this.y = groundLevel;
-        this.groundLevel = groundLevel;
+        this.y = y;
     }
 
     public jump() {
@@ -49,5 +52,14 @@ export class BasePlayer extends BaseObject {
         }
     }
 
-    public onAnimationCycleTerminate() { }
+    public onAnimationCycleTerminate() {
+        if (PlayerState.Attack) {
+            this.isAttacking = false;
+            this.setState(PlayerState.Idle)
+        }
+        if (PlayerState.AttackMirrored) {
+            this.isAttacking = false;
+            this.setState(PlayerState.IdleMirrored)
+        }
+    }
 }

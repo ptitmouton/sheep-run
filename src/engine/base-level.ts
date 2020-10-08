@@ -79,6 +79,9 @@ export class BaseLevel {
             this.player.isMirrored = false;
             this.player.velocity[0] = clamp(this.player.velocity[0]+.5, 0, 4);
         }
+        if (Input.actionKey) {
+            this.player.isAttacking = true;
+        }
 
         let [newX, newY] = [this.player.x, this.player.y];
         let isGrounded = false;
@@ -118,7 +121,9 @@ export class BaseLevel {
             }
         }
 
-        if (isGrounded) {
+        if (this.player.isAttacking) {
+            this.player.setState(this.player.isMirrored ? PlayerState.AttackMirrored : PlayerState.Attack);
+        } else if (isGrounded) {
             if (this.player.velocity[0] != 0) {
                 this.player.setState(this.player.isMirrored ? PlayerState.RunMirrored : PlayerState.Run);
             } else {
@@ -159,11 +164,14 @@ export class BaseLevel {
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#ff0000';
         ctx.font = '42x sans-serif';
-        ctx.fillText(`x: ${this.player.x}`, 20, 20);
-        ctx.fillText(`y: ${this.player.y}`, 20, 30);
-        ctx.fillText(`y: ${this.player.y}`, 20, 30);
-        ctx.fillText(`velocityX: ${this.player.velocity[0]}`, 20, 40);
-        ctx.fillText(`velocityY: ${this.player.velocity[1]}`, 20, 50);
-        ctx.fillText(`FPS: ${Math.floor(1000 / this.frameDuration)}`, 20, 60);
+        ctx.fillText(`FPS: ${Math.floor(1000 / this.frameDuration)}`, 20, 15);
+        ctx.fillText(`x: ${this.player.x}`, 20, 30);
+        ctx.fillText(`y: ${this.player.y}`, 20, 45);
+        ctx.fillText(`y: ${this.player.y}`, 20, 60);
+        ctx.fillText(`velocityX: ${this.player.velocity[0]}`, 20, 75);
+        ctx.fillText(`velocityY: ${this.player.velocity[1]}`, 20, 90);
+
+        ctx.fillText(`jumpCount: ${this.player.jumpCount}`, 100, 15);
+        ctx.fillText(`isAttacking: ${this.player.isAttacking}`, 100, 30);
     }
 }

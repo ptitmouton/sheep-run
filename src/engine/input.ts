@@ -14,15 +14,15 @@ export const Input = {
             if (e.code === 'ArrowRight' || e.code === 'KeyD') { 
                 this.rightKey = true;
             }
-            if (e.code === 'Space') {
+            if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
                 this.actionKey = true;
             }
         });
-        document.addEventListener('keyup', e => {
+        document.addEventListener('keyup', () => {
             this.leftKey = false;
             this.rightKey = false;
             this.jumpKey = false;
-            this.actionkey = false;
+            this.actionKey = false;
         });
     }
 };
