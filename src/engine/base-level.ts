@@ -17,6 +17,8 @@ export class BaseLevel {
 
     private debugMode = false;
 
+    private frameDuration = 0;
+
     constructor({ background, objects, player, groundLevel }: { background: BaseBackground, objects: BaseObject[], player: BasePlayer, groundLevel: number }) {
         this.background = background;
         this.objects = objects;
@@ -138,7 +140,10 @@ export class BaseLevel {
             this.animate(timestamp);
             this.render(canvas);
         }
-        requestAnimationFrame(timestamp => this.next(canvas, timestamp));
+        requestAnimationFrame(ts => {
+            this.frameDuration = ts - timestamp;
+            this.next(canvas, ts);
+        });
     }
 
     protected render(canvas: HTMLCanvasElement) {
@@ -159,5 +164,6 @@ export class BaseLevel {
         ctx.fillText(`y: ${this.player.y}`, 20, 30);
         ctx.fillText(`velocityX: ${this.player.velocity[0]}`, 20, 40);
         ctx.fillText(`velocityY: ${this.player.velocity[1]}`, 20, 50);
+        ctx.fillText(`FPS: ${Math.floor(1000 / this.frameDuration)}`, 20, 60);
     }
 }
