@@ -1,7 +1,10 @@
 import { Spritesheet } from './spritesheet';
+import { AudioEffect } from './audio-effect';
 
 export abstract class BaseObject {
     protected static spritesheets: Map<number, Spritesheet> = new Map();
+
+    protected static audio: Map<number, AudioEffect> = new Map();
 
     protected currentState = 0;
 
@@ -26,10 +29,16 @@ export abstract class BaseObject {
     public boundingMargin = [40, 5];
 
     public static load() {
-        return Promise.all(
-            Array.from(this.spritesheets.entries())
-                .map(([state]) => this.spritesheets.get(state).load())
-        );
+        return Promise.all([
+            ...Array.from(this.spritesheets.entries())
+                .map(([state]) => this.spritesheets.get(state).load()),
+            ...Array.from(this.audio.entries())
+                .map(([state]) => this.audio.get(state).load())
+        ]);
+    }
+
+    public playSound(sound: number) {
+        (this.constructor as typeof BaseObject).audio.get(sound).play();
     }
 
     protected shouldAnimate(timestamp: number) {
@@ -64,10 +73,13 @@ export abstract class BaseObject {
         }
     }
 
+    public onSetState(oldState: number, newState: number) {
+        this.currentAnimationStep = 0;
+    }
+
     public setState(state: number) {
         if (this.currentState !== state) {
-            this.currentAnimationStep = 0;
-            console.debug(`set ${this.constructor.name} state: ${state}`);
+            this.onSetState(this.currentState, state);
             this.currentState = state;
         }
     }

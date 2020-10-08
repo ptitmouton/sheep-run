@@ -1,5 +1,6 @@
 import { BaseObject } from '../engine/base-object';
 import { Spritesheet } from '../engine/spritesheet';
+import {AudioEffect} from './audio-effect';
 
 export enum PlayerState {
     Idle,
@@ -14,6 +15,11 @@ export enum PlayerState {
     AttackMirrored,
 };
 
+export enum PlayerAudio {
+    Jump,
+    Attack,
+}
+
 export class BasePlayer extends BaseObject {
     protected static spritesheets = new Map([
         [PlayerState.Idle, new Spritesheet(require('../assets/player/HeroKnight_Idle.png').default, 8)],
@@ -26,6 +32,11 @@ export class BasePlayer extends BaseObject {
         [PlayerState.FallMirrored, new Spritesheet(require('../assets/player/HeroKnight_Fall_Mirrored.png').default, 4)],
         [PlayerState.Attack, new Spritesheet(require('../assets/player/HeroKnight_Attack.png').default, 8)],
         [PlayerState.AttackMirrored, new Spritesheet(require('../assets/player/HeroKnight_Attack_Mirrored.png').default, 8)],
+    ]);
+
+    protected static audio = new Map([
+        [PlayerAudio.Jump, new AudioEffect(require('../assets/player/jump.wav').default)],
+        [PlayerAudio.Attack, new AudioEffect(require('../assets/player/attack.wav').default)]
     ]);
 
     public width = 100;
@@ -60,6 +71,20 @@ export class BasePlayer extends BaseObject {
         if (PlayerState.AttackMirrored) {
             this.isAttacking = false;
             this.setState(PlayerState.IdleMirrored)
+        }
+    }
+
+    public onSetState(oldState: PlayerState, newState: PlayerState) {
+        super.onSetState(oldState, newState);
+        if (
+            (newState === PlayerState.Jump || newState === PlayerState.JumpMirrored) &&
+            oldState !== PlayerState.Jump && oldState !== PlayerState.JumpMirrored) {
+            this.playSound(PlayerAudio.Jump);
+        }
+        if (
+            (newState === PlayerState.Attack || newState === PlayerState.AttackMirrored) &&
+            oldState !== PlayerState.Attack && oldState !== PlayerState.AttackMirrored) {
+            this.playSound(PlayerAudio.Attack);
         }
     }
 }
