@@ -120,15 +120,15 @@ export class BaseLevel {
 
         if (isGrounded) {
             if (this.player.velocity[0] != 0) {
-                this.player.setState(PlayerState.Run);
+                this.player.setState(this.player.isMirrored ? PlayerState.RunMirrored : PlayerState.Run);
             } else {
-                this.player.setState(PlayerState.Idle);
+                this.player.setState(this.player.isMirrored ? PlayerState.IdleMirrored : PlayerState.Idle);
             }
         } else {
             if (this.player.velocity[1] > 0) {
-                this.player.setState(PlayerState.Fall);
+                this.player.setState(this.player.isMirrored ? PlayerState.FallMirrored : PlayerState.Fall);
             } else {
-                this.player.setState(PlayerState.Jump);
+                this.player.setState(this.player.isMirrored ? PlayerState.JumpMirrored : PlayerState.Jump);
             }
         }
     }

@@ -3,17 +3,25 @@ import { Spritesheet } from '../engine/spritesheet';
 
 export enum PlayerState {
     Idle,
+    IdleMirrored,
     Jump,
+    JumpMirrored,
     Fall,
-    Run
+    FallMirrored,
+    Run,
+    RunMirrored,
 };
 
 export class BasePlayer extends BaseObject {
     protected static spritesheets = new Map([
         [PlayerState.Idle, new Spritesheet(require('../assets/player/HeroKnight_Idle.png').default, 8)],
+        [PlayerState.IdleMirrored, new Spritesheet(require('../assets/player/HeroKnight_Idle_Mirrored.png').default, 8)],
         [PlayerState.Jump, new Spritesheet(require('../assets/player/HeroKnight_Jump.png').default, 3)],
+        [PlayerState.JumpMirrored, new Spritesheet(require('../assets/player/HeroKnight_Jump_Mirrored.png').default, 3)],
         [PlayerState.Run, new Spritesheet(require('../assets/player/HeroKnight_Run.png').default, 10)],
+        [PlayerState.RunMirrored, new Spritesheet(require('../assets/player/HeroKnight_Run_Mirrored.png').default, 10)],
         [PlayerState.Fall, new Spritesheet(require('../assets/player/HeroKnight_Fall.png').default, 4)],
+        [PlayerState.FallMirrored, new Spritesheet(require('../assets/player/HeroKnight_Fall_Mirrored.png').default, 4)],
     ]);
 
     public width = 100;
