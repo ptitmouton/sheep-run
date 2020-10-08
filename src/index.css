@@ -11,3 +11,18 @@ body {
     justify-content: center;
     margin: 0;
 }
+
+.help-button {
+    font-size: x-large;
+    position: absolute;
+    top: .125em;
+    right: .125em;
+    padding: .25em .5em;
+    border-radius: 0 0 0 20px;
+    background-color: #fff;
+    border-color: #000;
+    cursor: help;
+}
+.help-button:hover {
+    background-color: #3ff;
+}
